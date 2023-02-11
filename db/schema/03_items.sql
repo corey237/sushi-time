@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS items CASCADE;
+
+CREATE TABLE items (
+  id SERIAL PRIMARY KEY NOT NULL,
+  item_name VARCHAR(255) NOT NULL,
+  item_description TEXT NOT NULL,
+  price INTEGER NOT NULL DEFAULT 0.00,
+  item_category VARCHAR(255) NOT NULL,
+  item_img VARCHAR(255) NOT NULL
+);
