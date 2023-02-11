@@ -8,14 +8,8 @@
 const express = require("express");
 const router = express.Router();
 
-<<<<<<< HEAD
-router.get('/', (req, res) => {
-  res.render('index.ejs');
-}); 
-=======
 router.get("/", (req, res) => {
-  res.render("users");
+  res.render("index.ejs");
 });
->>>>>>> feature/schema
 
 module.exports = router;
