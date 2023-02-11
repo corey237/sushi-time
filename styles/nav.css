@@ -1,0 +1,34 @@
+body {
+  background-color:#faf7f7
+}
+
+nav {
+  position: fixed;
+}
+
+.navbar-bg {
+  background-color: 	#FFFFFF;
+  border-bottom: 2px solid #ff782e;
+}
+
+.logo {
+  font-family: 'Rock Salt', cursive;
+  text-decoration: none;
+  color: #ff782e;
+  font-size: 40px;
+  border-bottom: none;
+}
+
+.navbar-buttons {
+  font-family: 'Lato', sans-serif;
+  color: #ff782e;
+  font-size: 15px;
+  border: 2px solid hsl(21, 100%, 59%);
+  text-align: center;
+  margin-left: 50px;
+}
+
+.navbar-buttons:hover {
+  background-color: #ff782e;
+  color: #FFFFFF;
+}
