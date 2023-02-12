@@ -1,0 +1,19 @@
+h1 {
+  font-family: "Rock Salt", cursive;
+  text-decoration: none;
+  color: #ff782e;
+  font-size: 40px;
+  border-bottom: none;
+  text-align: center;
+}
+
+.item-container {
+  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.quantity {
+  text-align: center;
+  margin-bottom: 15px;
+}
