@@ -12,4 +12,8 @@ router.get("/", (req, res) => {
   res.render("index.ejs");
 });
 
+router.get("/cart", (req, res) => {
+  res.render("order_summary.ejs");
+});
+
 module.exports = router;
