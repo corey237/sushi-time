@@ -1,5 +1,5 @@
 body {
-  background-color:#faf7f7
+  background-color: #faf7f7;
 }
 
 nav {
@@ -7,12 +7,12 @@ nav {
 }
 
 .navbar-bg {
-  background-color: 	#FFFFFF;
+  background-color: #ffffff;
   border-bottom: 2px solid #ff782e;
 }
 
 .logo {
-  font-family: 'Rock Salt', cursive;
+  font-family: "Rock Salt", cursive;
   text-decoration: none;
   color: #ff782e;
   font-size: 40px;
@@ -20,7 +20,7 @@ nav {
 }
 
 .navbar-buttons {
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
   color: #ff782e;
   font-size: 15px;
   border: 2px solid hsl(21, 100%, 59%);
@@ -30,5 +30,11 @@ nav {
 
 .navbar-buttons:hover {
   background-color: #ff782e;
-  color: #FFFFFF;
+  color: #ffffff;
+}
+
+.fa-cart-shopping {
+  color: #ff782e;
+  letter-spacing: 3px;
+  margin-right: 5px;
 }

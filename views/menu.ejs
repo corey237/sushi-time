@@ -12,12 +12,17 @@
     <link rel="stylesheet" href="/styles/menu.css" />
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/app.js"></script>
+    <script src="/scripts/menu.js"></script>
   </head>
   <body>
     <h1 class="appetizer-header">Appetizers</h1>
     <article class="item-container">
       <div class="card" style="width: 18rem">
-        <img src="/img/miso-soup.jpg" class="card-img-top" alt="..." />
+        <img
+          src="/img/miso-soup.jpg"
+          class="card-img-top"
+          alt="Picture of Miso Soup"
+        />
         <div class="card-body">
           <h5 class="card-title">Miso Soup</h5>
           <p class="card-text">
@@ -27,14 +32,20 @@
           <input
             type="text"
             name="quantity"
-            class="quantity"
+            class="miso-soup-quantity"
             placeholder="Quantity"
           />
-          <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+          <a href="#" class="btn btn-primary miso-soup-add-to-cart"
+            >Add to Cart</a
+          >
         </div>
       </div>
       <div class="card" style="width: 18rem">
-        <img src="/img/onigiri.jpg" class="card-img-top" alt="..." />
+        <img
+          src="/img/onigiri.jpg"
+          class="card-img-top"
+          alt="Picture of Onigiri"
+        />
         <div class="card-body">
           <h5 class="card-title">Onigiri (Japenese Rice Balls)</h5>
           <p class="card-text">
@@ -44,10 +55,12 @@
           <input
             type="text"
             name="quantity"
-            class="quantity"
+            class="onigiri-quantity"
             placeholder="Quantity"
           />
-          <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+          <a href="#" class="btn btn-primary onigiri-add-to-cart"
+            >Add to Cart</a
+          >
         </div>
       </div>
       <div class="card" style="width: 18rem">
@@ -61,10 +74,10 @@
           <input
             type="text"
             name="quantity"
-            class="quantity"
+            class="tofu-quantity"
             placeholder="Quantity"
           />
-          <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+          <a href="#" class="btn btn-primary tofu-add-to-cart">Add to Cart</a>
         </div>
       </div>
       <div class="card" style="width: 18rem">
@@ -78,10 +91,12 @@
           <input
             type="text"
             name="quantity"
-            class="quantity"
+            class="adamame-quantity"
             placeholder="Quantity"
           />
-          <a href="#" class="btn btn-primary add-to-cart">Add to Cart</a>
+          <a href="#" class="btn btn-primary adamame-add-to-cart"
+            >Add to Cart</a
+          >
         </div>
       </div>
     </article>
