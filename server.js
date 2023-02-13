@@ -59,3 +59,8 @@ app.get("/order_status", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+app.get('/menu', (req, res) => {
+  res.render('menu');
+});
+
