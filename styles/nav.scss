@@ -8,6 +8,28 @@ nav {
 
 .navbar-bg {
   background-color: #ffffff;
+  background: radial-gradient(
+    circle at left bottom,
+    transparent 14%,
+    #ffd2ba 15%,
+    #ffd2ba 25%,
+    transparent 26%,
+    transparent 34%,
+    #ffd2ba80 35%,
+    #ffd2ba80 45%,
+    transparent 46%,
+    transparent 54%,
+    #ffd2ba 55%,
+    #ffd2ba 65%,
+    transparent 66%,
+    transparent 74%,
+    #ffd2ba80 75%,
+    #ffd2ba80 85%,
+    transparent 86%
+  );
+  background-size: 1em 1em;
+  background-color: #ffe3d4;
+  opacity: 1;
   border-bottom: 2px solid #ff782e;
 }
 
