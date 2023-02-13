@@ -49,7 +49,11 @@ app.get("/", (req, res) => {
 });
 
 app.get("/cart", (req, res) => {
-  res.render("order_summary");
+  res.render("shopping_cart");
+});
+
+app.get("/order_status", (req, res) => {
+  res.render("order_status");
 });
 
 app.listen(PORT, () => {
