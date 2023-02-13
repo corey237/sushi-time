@@ -64,7 +64,11 @@ app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
 
-app.get('/menu', (req, res) => {
-  res.render('menu');
+app.get("/menu", (req, res) => {
+  res.render("menu");
 });
 
+
+app.post('/cart', (req, res) => {
+  console.log(req.body); 
+})
