@@ -94,6 +94,10 @@ $(document).ready(function () {
     const itemTotal = calculateTotal();
     $('.total-cost').html(`$${itemTotal}`);
   });
-  
+
+  $('.order-button').on('click', function() {
+    $.post('/cart', {...localStorage});
+  })
+
 
 });
