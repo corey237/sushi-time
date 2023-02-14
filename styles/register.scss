@@ -14,8 +14,18 @@
   align-self: center;
 }
 
-#registerButton {
-  margin-top: 20px;
-  width: 100px;
-  align-self: center;
+.card-body {
+  color: #ff782e;
+}
+
+#i-text {
+  font-family: "Rock Salt";
+}
+
+#register-button {
+  font-size: 1.3em;
+  font-family: "Lato", sans-serif;
+  color: #ff782e;
+  background-color: #ffffff;
+  border: 2px solid #ff782e;
 }

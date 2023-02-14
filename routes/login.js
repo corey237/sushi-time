@@ -1,45 +1,48 @@
+// Import dependencies
 const express = require("express");
-const bcrypt = require("bcryptjs");
 const router = express.Router();
-const userQueries = require("../db/queries/users");
+const bcrypt = require("bcrypt");
+const db = require("../db/connection");
 
-// GET
+// Display the login page
 router.get("/", (req, res) => {
-  if (req.session.user_id) {
-    userQueries.getUserById(req.session.userId).then((user) => {
-      if (!user.is_admin) {
-        return res.redirect("/menu");
-      }
-
-      if (user.is_admin) {
-        return res.redirect("/orders");
-      }
-    });
-  } else {
-    res.render("login");
-  }
+  res.render("login");
 });
 
-// POST
+// Process the login form submission
 router.post("/", (req, res) => {
-  userQueries
-    .getUserByEmail(req.body.email)
-    .then((user) => {
-      if ((req.body.password, user.password)) {
-        req.session.userId = user.id;
+  const { email, password } = req.body;
 
-        if (!user.is_admin) {
-          return res.redirect("/menu");
+  // Check if the user exists in the database
+  db.query("SELECT * FROM users WHERE email = $1", [email], (err, result) => {
+    console.log(result.rows);
+    if (err) {
+      throw err;
+    }
+
+    // If the user exists, check the password
+    if (result.rows.length > 0) {
+      const user = result.rows[0];
+
+      bcrypt.compareSync(password, user.password, (err, isMatch) => {
+        if (err) {
+          throw err;
         }
 
-        if (user.is_admin) {
-          return res.redirect("/orders");
+        if (isMatch) {
+          // If the password matches, create a session and redirect to menu
+          req.session.user = user;
+          res.redirect("/menu");
+        } else {
+          // If the password does not match, show an error message
+          res.render("login", { message: "Invalid username or password" });
         }
-      }
-    })
-    .catch((err) => {
-      return res.json({ error: "Wrong email/password combination" });
-    });
+      });
+    } else {
+      // If the user does not exist, show an error message
+      res.render("login", { message: "Invalid username or password" });
+    }
+  });
 });
 
 module.exports = router;
