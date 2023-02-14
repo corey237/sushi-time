@@ -60,15 +60,22 @@ app.get("/orders", (req, res) => {
   res.render("orders");
 });
 
-app.listen(PORT, () => {
-  console.log(`Example app listening on port ${PORT}`);
-});
-
 app.get("/menu", (req, res) => {
   res.render("menu");
 });
 
-
 app.post('/cart', (req, res) => {
-  console.log(req.body); 
+  console.log(req.body);
 })
+
+app.get("/login", (req, res) => {
+  res.render('login');
+});
+
+app.get("/register", (req, res) => {
+  res.render('register');
+});
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`);
+});
