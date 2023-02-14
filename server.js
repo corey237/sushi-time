@@ -5,11 +5,19 @@ require("dotenv").config();
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
+const cookieSession = require("cookie-session");
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.set("view engine", "ejs");
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -32,12 +40,15 @@ const userApiRoutes = require("./routes/users-api");
 const widgetApiRoutes = require("./routes/widgets-api");
 const usersRoutes = require("./routes/users");
 
+const loginRoute = require("./routes/login");
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
+app.use("/login", loginRoute);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -68,7 +79,6 @@ app.get("/menu", (req, res) => {
   res.render("menu");
 });
 
-
-app.post('/cart', (req, res) => {
-  console.log(req.body); 
-})
+app.post("/cart", (req, res) => {
+  console.log(req.body);
+});
