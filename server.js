@@ -40,7 +40,7 @@ const userApiRoutes = require("./routes/users-api");
 const widgetApiRoutes = require("./routes/widgets-api");
 const usersRoutes = require("./routes/users");
 
-const loginRoute = require("./routes/login");
+const loginRoutes = require("./routes/login");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -48,7 +48,7 @@ const loginRoute = require("./routes/login");
 app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
-app.use("/login", loginRoute);
+app.use("/login", loginRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -77,10 +77,6 @@ app.get("/menu", (req, res) => {
 
 app.post("/cart", (req, res) => {
   console.log(req.body);
-});
-
-app.get("/login", (req, res) => {
-  res.render("login");
 });
 
 app.get("/register", (req, res) => {

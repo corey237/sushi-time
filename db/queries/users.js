@@ -8,7 +8,7 @@ const getUsers = () => {
 
 const getUserByEmail = (email) => {
   return db
-    .query("SELECT * FROM users WHERE email = $1;", [email])
+    .query(`SELECT * FROM users WHERE email = ${email};`, [email])
     .then((data) => {
       return data.rows[0];
     });
