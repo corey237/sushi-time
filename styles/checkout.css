@@ -1,14 +1,12 @@
-.order-button {
-  font-size: 2em;
-  font-family: "Lato", sans-serif;
-  background-color: #ffffff;
-  border: 2px solid #ff782e;
-}
-
 #my-order-header {
   font-family: "Rock Salt", cursive;
   text-decoration: none;
   color: #ff782e;
   font-size: 2em;
   border-bottom: none;
+  display: inline-block;
+}
+
+.order-button {
+  color: #ff782e;
 }
