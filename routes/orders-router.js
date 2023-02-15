@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const userQueries = require("../db/queries/order-helpers");
+const { getUserById } = require("../db/queries/userHelpers");
 const db = require("../db/connection");
 
 router.get("/", async (req, res) => {
@@ -16,7 +17,14 @@ router.get("/", async (req, res) => {
   const orders = await userQueries.getOrdersByUserId(user_id);
 
   // Render the orders template with the orders data
-  res.render("orders.ejs", { orders });
+
+  getUserById(req.session["user_id"]).then((response) => {
+    res.render("orders", {
+      user: req.session["user_id"],
+      userInfo: response,
+      orders,
+    });
+  });
 });
 
 module.exports = router;

@@ -61,7 +61,7 @@ app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
-app.use("/logout", logoutRouter)
+app.use("/logout", logoutRouter);
 app.use("/orders", ordersRouter);
 app.use("/menu", menuRouter);
 
@@ -72,14 +72,12 @@ app.use("/menu", menuRouter);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  getUserById(req.session["user_id"])
-    .then((response) => {
-      
-      res.render("index", {
-        user: req.session["user_id"],
-        userInfo: response
-      });
+  getUserById(req.session["user_id"]).then((response) => {
+    res.render("index", {
+      user: req.session["user_id"],
+      userInfo: response,
     });
+  });
 });
 
 // app.get("/cart", (req, res) => {
@@ -108,7 +106,7 @@ app.get("/", (req, res) => {
 
 //click 'Sushi Time' on nav to go back to home page
 app.get("/index", (req, res) => {
-  res.render('index');
+  res.render("index");
 });
 
 app.listen(PORT, () => {
