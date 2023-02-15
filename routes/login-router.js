@@ -5,7 +5,10 @@ const db = require("../db/connection");
 const bcrypt = require("bcryptjs");
 
 router.get("/", (req, res) => {
-  res.render("login", {
+  if (req.session["user_id"]) {
+    res.redirect("menu");
+  }
+  res.render("login", { 
     user: req.session["user_id"]
   });
 });
@@ -26,7 +29,7 @@ router.post("/", async (req, res) => {
     const user = result.rows[0];
 
     if (!user) {
-      res.render("login", { error: "Invalid email or password." });
+      res.render("login", { user: req.session["user_id"], error: "Invalid email or password." });
       return;
     }
 
@@ -34,14 +37,15 @@ router.post("/", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.render("login", { error: "Invalid email or password." });
+      res.render("login", { user: req.session["user_id"], error: "Invalid email or password." });
       return;
     }
 
     // Set the session cookie to remember the user
     req.session.user_id = user.id;
-    res.redirect("/menu");
+    res.redirect("menu");
   } catch (err) {
+    console.error(err);
     res.render("login", {
       error: "An error occurred. Please try again later.",
     });

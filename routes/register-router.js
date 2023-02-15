@@ -6,7 +6,7 @@ const db = require("../db/connection");
 const { getUserByEmail, insertUser } = require("../db/queries/userHelpers");
 
 router.get("/", (req, res) => {
-  res.render("register.ejs", {error: null});
+  res.render("register.ejs", {error: null, user: req.session['user_id']});
 });
 
 router.post("/", (req, res) => {  

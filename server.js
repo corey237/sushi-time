@@ -42,8 +42,10 @@ const usersRoutes = require("./routes/users");
 const loginRouter = require("./routes/login-router");
 const registerRouter = require("./routes/register-router");
 const logoutRouter = require("./routes/logout-router");
+const ordersRouter = require("./routes/orders-router");
+const checkoutRouter = require("./routes/checkout-router");
+const menuRouter = require("./routes/menu-router");
 const { getUserById } = require("./db/queries/userHelpers");
-
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -53,6 +55,9 @@ app.use("/users", usersRoutes);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter)
+app.use("/orders", ordersRouter);
+app.use("/checkout", checkoutRouter);
+app.use("/menu", menuRouter)
 
 // Note: mount other resources here, using the same pattern above
 
@@ -63,48 +68,12 @@ app.use("/logout", logoutRouter)
 app.get("/", (req, res) => {
   getUserById(req.session["user_id"])
     .then((response) => {
-      
       res.render("index", {
         user: req.session["user_id"],
         userInfo: response
       });
     });
 });
-
-// app.get("/cart", (req, res) => {
-//   res.render("shopping_cart");
-// });
-
-// app.get("/order_status", (req, res) => {
-//   res.render("order_status");
-// });
-
-// app.get("/orders", (req, res) => {
-//   res.render("orders");
-// });
-
-app.get("/menu", (req, res) => {
-  getUserById(req.session["user_id"])
-  .then((response) => {
-    
-    res.render("menu", {
-      user: req.session["user_id"],
-      userInfo: response
-    });
-  });
-});
-
-// app.post('/cart', (req, res) => {
-//   console.log(req.body);
-// })
-
-// app.get("/login", (req, res) => {
-//   res.render('login');
-// });
-
-// app.get("/register", (req, res) => {
-//   res.render('register');
-// });
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
