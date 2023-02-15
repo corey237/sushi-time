@@ -22,9 +22,11 @@
           class="card-title mx-auto"
           style="margin-bottom: 10px"
         >
-          My Orders
+          <% if (isAdmin) { %> Orders <% } else { %> My Orders <% } %>
         </h3>
       </div>
+
+      <% if (isAdmin) { %> <% orders.forEach(order => { %>
       <div class="card rounded-3 mb-4">
         <table class="table table-hover table-striped" id="orders-table">
           <thead class="orders-table-head">
@@ -35,10 +37,10 @@
               <th scope="col">total_cost</th>
               <th scope="col">is_completed</th>
               <th scope="col">time_completed</th>
+              <th scope="col">Complete Order</th>
             </tr>
           </thead>
           <tbody>
-            <% orders.forEach(order => { %>
             <tr>
               <td><%= order.id %></td>
               <td><%= order.time_placed %></td>
@@ -46,8 +48,36 @@
               <td><%= order.total_cost %></td>
               <td><%= order.is_completed %></td>
               <td><%= order.time_completed %></td>
+              <td><form action="/complete-order" method="POST">
+                <button type="submit">Complete Order</button>
+              </form></td>
+
             </tr>
-            <% }); %>
+            </tbody>
+            <% }); %> <% } else { %> <% orders.forEach(order => { %>
+              <div class="card rounded-3 mb-4">
+                <table class="table table-hover table-striped" id="orders-table">
+                  <thead class="orders-table-head">
+                    <tr>
+                      <th scope="col">Order #</th>
+                      <th scope="col">Placed</th>
+                      <th scope="col">Estimated Time</th>
+                      <th scope="col">total_cost</th>
+                      <th scope="col">is_completed</th>
+                      <th scope="col">time_completed</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><%= order.id %></td>
+                      <td><%= order.time_placed %></td>
+                      <td><%= order.time_estimated %></td>
+                      <td><%= order.total_cost %></td>
+                      <td><%= order.is_completed %></td>
+                      <td><%= order.time_completed %></td>
+                    </tr>
+                    </tbody>
+            <% }); %> <% } %>
           </tbody>
         </table>
       </div>

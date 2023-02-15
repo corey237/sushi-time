@@ -7,5 +7,11 @@ const getOrdersByUserId = (user) => {
       return data.rows;
     });
 };
-module.exports = { getOrdersByUserId };
 
+const getAllOrders = (user) => {
+  return db.query(`SELECT * FROM orders `).then((data) => {
+    return data.rows;
+  });
+};
+
+module.exports = { getOrdersByUserId, getAllOrders };
