@@ -8,7 +8,9 @@ router.get("/", (req, res) => {
   if (req.session.user_id) {
     res.redirect("/menu");
   }
-  res.render("login");
+  res.render("login", {
+    user: req.session["user_id"]
+  });
 });
 
 // Handle the login form submission
@@ -27,7 +29,7 @@ router.post("/", async (req, res) => {
     const user = result.rows[0];
 
     if (!user) {
-      res.render("login", { error: "Invalid email or password." });
+      res.render("login", { user: req.session["user_id"], error: "Invalid email or password." });
       return;
     }
 
@@ -35,7 +37,7 @@ router.post("/", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.render("login", { error: "Invalid email or password." });
+      res.render("login", { user: req.session["user_id"], error: "Invalid email or password." });
       return;
     }
 
@@ -43,7 +45,6 @@ router.post("/", async (req, res) => {
     req.session.user_id = user.id;
     res.redirect("/menu");
   } catch (err) {
-    console.error(err);
     res.render("login", {
       error: "An error occurred. Please try again later.",
     });
@@ -51,3 +52,5 @@ router.post("/", async (req, res) => {
 });
 
 module.exports = router;
+
+

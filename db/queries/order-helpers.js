@@ -7,5 +7,5 @@ const getOrdersByUserId = (user) => {
       return data.rows;
     });
 };
-
 module.exports = { getOrdersByUserId };
+
