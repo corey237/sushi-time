@@ -51,6 +51,7 @@ const registerRouter = require("./routes/register-router");
 const logoutRouter = require("./routes/logout-router");
 const { getUserById } = require("./db/queries/userHelpers");
 const ordersRouter = require("./routes/orders-router");
+const menuRouter = require("./routes/menu-router");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -62,6 +63,7 @@ app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter)
 app.use("/orders", ordersRouter);
+app.use("/menu", menuRouter);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -91,16 +93,6 @@ app.get("/", (req, res) => {
 // app.get("/orders", (req, res) => {
 //   res.render("orders");
 // });
-
-app.get("/menu", (req, res) => {
-  getUserById(req.session["user_id"])
-  .then((response) => {
-    res.render("menu", {
-      user: req.session["user_id"],
-      userInfo: response
-    });
-  });
-});
 
 // app.post('/cart', (req, res) => {
 //   console.log(req.body);
