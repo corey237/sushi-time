@@ -29,23 +29,25 @@
         <table class="table table-hover table-striped" id="orders-table">
           <thead class="orders-table-head">
             <tr>
-              <th scope="col">order_id</th>
-              <th scope="col">time_placed</th>
-              <th scope="col">time_estimated</th>
+              <th scope="col">Order #</th>
+              <th scope="col">Placed</th>
+              <th scope="col">Estimated Time</th>
               <th scope="col">total_cost</th>
               <th scope="col">is_completed</th>
               <th scope="col">time_completed</th>
             </tr>
           </thead>
           <tbody>
+            <% orders.forEach(order => { %>
             <tr>
-              <td>order_id</td>
-              <td>time_placed</td>
-              <td>time_estimated</td>
-              <td>total_cost</td>
-              <td>is_completed</td>
-              <td>time_completed</td>
+              <td><%= order.id %></td>
+              <td><%= order.time_placed %></td>
+              <td><%= order.time_estimated %></td>
+              <td><%= order.total_cost %></td>
+              <td><%= order.is_completed %></td>
+              <td><%= order.time_completed %></td>
             </tr>
+            <% }); %>
           </tbody>
         </table>
       </div>
