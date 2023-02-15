@@ -41,6 +41,8 @@ const widgetApiRoutes = require("./routes/widgets-api");
 const usersRoutes = require("./routes/users");
 const loginRouter = require("./routes/login-router");
 const registerRouter = require("./routes/register-router");
+const logoutRouter = require("./routes/logout-router");
+const { getUserById } = require("./db/queries/userHelpers");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -49,6 +51,8 @@ app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/register", registerRouter);
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter)
 
 // Note: mount other resources here, using the same pattern above
 
@@ -57,7 +61,14 @@ app.use("/register", registerRouter);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  res.render("index");
+  getUserById(req.session["user_id"])
+    .then((response) => {
+      
+      res.render("index", {
+        user: req.session["user_id"],
+        userInfo: response
+      });
+    });
 });
 
 // app.get("/cart", (req, res) => {
@@ -72,9 +83,16 @@ app.get("/", (req, res) => {
 //   res.render("orders");
 // });
 
-// app.get("/menu", (req, res) => {
-//   res.render("menu");
-// });
+app.get("/menu", (req, res) => {
+  getUserById(req.session["user_id"])
+  .then((response) => {
+    
+    res.render("menu", {
+      user: req.session["user_id"],
+      userInfo: response
+    });
+  });
+});
 
 // app.post('/cart', (req, res) => {
 //   console.log(req.body);
