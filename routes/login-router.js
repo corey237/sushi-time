@@ -5,6 +5,9 @@ const db = require("../db/connection");
 const bcrypt = require("bcryptjs");
 
 router.get("/", (req, res) => {
+  if (req.session.user_id) {
+    res.redirect("/menu");
+  }
   res.render("login");
 });
 
@@ -38,7 +41,7 @@ router.post("/", async (req, res) => {
 
     // Set the session cookie to remember the user
     req.session.user_id = user.id;
-    res.redirect("/");
+    res.redirect("/menu");
   } catch (err) {
     console.error(err);
     res.render("login", {
