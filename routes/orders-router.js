@@ -4,7 +4,7 @@ const userQueries = require("../db/queries/order-helpers");
 const db = require("../db/connection");
 
 router.get("/", async (req, res) => {
-  const user_id = req.session.userId;
+  const user_id = req.session["user_id"];
 
   // Redirect to login page if user is not logged in
   if (!user_id) {

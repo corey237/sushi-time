@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   getUserByEmail(req.body.email)
     .then((user) => {
       if (!user) {
-        insertUser(req.body.name, req.body.email, req.body.password, req.body.phoneNumber)
+        insertUser(req.body.name, req.body.email, req.body.password, req.b ody.phoneNumber)
           .then((response) => {
             req.session['user_id'] = response['id'];
             res.redirect('/menu');
