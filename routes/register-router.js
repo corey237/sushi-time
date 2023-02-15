@@ -6,17 +6,21 @@ const db = require("../db/connection");
 const { getUserByEmail, insertUser } = require("../db/queries/userHelpers");
 
 router.get("/", (req, res) => {
-  res.render("register.ejs", { error: null });
+  if (req.session["user_id"]) {
+    res.redirect("menu")
+  }
+  res.render("register", { error: null, user: req.session["user_id"] });
 });
 
 router.post("/", (req, res) => {  
   getUserByEmail(req.body.email)
     .then((user) => {
+      console.log(user);
       if (!user) {
-        insertUser(req.body.name, req.body.email, req.body.password, req.b ody.phoneNumber)
+        insertUser(req.body.name, req.body.email, req.body.password, req.body.phone)
           .then((response) => {
             req.session['user_id'] = response['id'];
-            res.redirect('/menu');
+            res.redirect('menu');
           });
       } else {
         return res.render('register', {error: 'Error: User already exists'});
@@ -24,4 +28,3 @@ router.post("/", (req, res) => {
     })
 })
 module.exports = router;
-

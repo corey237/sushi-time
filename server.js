@@ -95,7 +95,6 @@ app.get("/", (req, res) => {
 app.get("/menu", (req, res) => {
   getUserById(req.session["user_id"])
   .then((response) => {
-    
     res.render("menu", {
       user: req.session["user_id"],
       userInfo: response
