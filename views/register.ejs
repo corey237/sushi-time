@@ -6,9 +6,8 @@
   This is the register page for Sushi Time. The user can use their information to register a new account.
 -->
 <%- include('partials/_header') %>
-  <!DOCTYPE html>
-  <html lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>Sushi Time 🍣</title>
     <meta charset="UTF-8" />
@@ -26,29 +25,66 @@
     <main style="margin: 4em">
       <div class="card text-center">
         <div class="card-body d-flex flex-column justify-content-center card text-black bg-light" style="height: 560px">
-          <h3 class="card-title" style="margin-bottom: 30px">Create New Account</h3>
-          <form class="form-inline" action="/login" method="POST">
+          <h3 class="card-title" style="margin-bottom: 30px">
+            Create New Account
+          </h3>
+          <% if (error) {%>
+          <p class="error-message"><%=error%></p>
+          <% } %>
+          <form class="form-inline" action="/register" method="POST">
             <div class="form-group mb-2 container d-flex flex-column">
               <div class="d-flex flex-column" id="nameEnter">
-                <label class="align-self-start ml-1" for="name">Name:</label>
-                <input class="form-control" type="text" name="name" placeholder="Enter your name."
-                  style="width: 300px; margin-bottom: 1em" />
+                <label id="i-text" class="align-self-start ml-1" for="name"
+                  >Name:</label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  name="name"
+                  placeholder="Enter your name."
+                  style="width: 300px; margin-bottom: 1em"
+                />
               </div>
               <div class="d-flex flex-column" id="emailEnter">
-                <label class="align-self-start ml-1" for="email">Email:</label>
-                <input class="form-control" type="email" name="email" placeholder="Enter your email here."
-                  style="width: 300px; margin-bottom: 1em" />
+                <label id="i-text" class="align-self-start ml-1" for="email"
+                  >Email:</label
+                >
+                <input
+                  class="form-control"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email here."
+                  style="width: 300px; margin-bottom: 1em"
+                />
               </div>
               <div class="d-flex flex-column" id="passwordEnter">
-                <label class="align-self-start ml-1" for="password">Password:</label>
-                <input class="form-control" type="password" name="password" placeholder="Enter your password here."
-                  style="width: 300px; margin-bottom: 1em" />
+                <label id="i-text" class="align-self-start ml-1" for="password"
+                  >Password:</label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password here."
+                  style="width: 300px; margin-bottom: 1em"
+                />
               </div>
               <div class="d-flex flex-column" id="phoneNumberEnter">
-                <label class="align-self-start ml-1" for="phoneNumber">Phone number:</label>
-                <input class="form-control" type="text" name="phoneNumber" placeholder="Enter your phone number here."
-                  style="width: 300px; margin-bottom: 1em" />
+                <label
+                  id="i-text"
+                  class="align-self-start ml-1"
+                  for="phoneNumber"
+                  >Phone number:</label
+                >
+                <input
+                  class="form-control"
+                  type="text"
+                  name="phone"
+                  placeholder="Enter your phone number here."
+                  style="width: 300px; margin-bottom: 1em"
+                />
               </div>
+              <div class="d-grid gap-2 col-2 mx-auto">
               <button type="submit" class="registerButton">
                 Register
               </button>
@@ -58,5 +94,4 @@
       </div>
     </main>
   </body>
-
-  </html>
+</html>
