@@ -29,7 +29,7 @@ const insertUser = function(name, email, password, phoneNumber) {
 
 
 const validateEmailAndPassword = function(email, password) {
-  getUserByEmail(email)
+  return getUserByEmail(email)
     .then((user) => {
       if (!user) {
         return false;
@@ -57,6 +57,8 @@ const getUserById = function(id) {
       return user.rows[0];
     })
 }
+
+
 
 
 module.exports = {getUserByEmail, insertUser, validateEmailAndPassword, getUserById};
