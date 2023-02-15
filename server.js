@@ -6,11 +6,18 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
 const bcrypt = require("bcryptjs");
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 const PORT = process.env.PORT || 8080;
 const app = express();
 
 app.set("view engine", "ejs");
+
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key1", "key2"],
+  })
+);
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -43,6 +50,7 @@ const loginRouter = require("./routes/login-router");
 const registerRouter = require("./routes/register-router");
 const logoutRouter = require("./routes/logout-router");
 const { getUserById } = require("./db/queries/userHelpers");
+const ordersRouter = require("./routes/orders-router");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -53,6 +61,7 @@ app.use("/users", usersRoutes);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter)
+app.use("/orders", ordersRouter);
 
 // Note: mount other resources here, using the same pattern above
 
@@ -105,6 +114,11 @@ app.get("/menu", (req, res) => {
 // app.get("/register", (req, res) => {
 //   res.render('register');
 // });
+
+//click 'Sushi Time' on nav to go back to home page
+app.get("/index", (req, res) => {
+  res.render('index');
+});
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

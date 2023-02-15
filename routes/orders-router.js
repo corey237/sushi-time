@@ -1,18 +1,22 @@
-const express = require('express');
-const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const express = require("express");
+const router = express.Router();
+const userQueries = require("../db/queries/order-helpers");
+const db = require("../db/connection");
 
-router.get('/', (req, res) => {
-  const sqlQuery = `
-  SELECT password FROM users WHERE id = $1
-  `
-  userQueries.getUsers()
-    .then(users => {
-      res.json({ users });
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+router.get("/", async (req, res) => {
+  const user_id = req.session["user_id"];
+
+  // Redirect to login page if user is not logged in
+  if (!user_id) {
+    res.redirect("/login");
+    return;
+  }
+
+  // Get the orders for the current user
+  const orders = await userQueries.getOrdersByUserId(user_id);
+
+  // Render the orders template with the orders data
+  res.render("orders.ejs", { orders });
 });
+
+module.exports = router;
