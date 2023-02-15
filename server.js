@@ -6,7 +6,7 @@ const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
 const bcrypt = require("bcryptjs");
-const cookieSession = require('cookie-session');
+const cookieSession = require("cookie-session");
 const PORT = process.env.PORT || 8080;
 const app = express();
 
@@ -49,23 +49,15 @@ const usersRoutes = require("./routes/users");
 const loginRouter = require("./routes/login-router");
 const registerRouter = require("./routes/register-router");
 
-const loginRouter = require("./routes/login");
-const registerRouter = require("./routes/register");
-
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
-<<<<<<< HEAD
-//
+app.use("/register", registerRouter);
 app.use("/login", loginRouter);
-app.use("/register", registerRouter);
-=======
-app.use("/register", registerRouter);
 
->>>>>>> master
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -92,11 +84,6 @@ app.get("/", (req, res) => {
 //   res.render("menu");
 // });
 
-<<<<<<< HEAD
-app.post("/cart", (req, res) => {
-  console.log(req.body);
-});
-=======
 // app.post('/cart', (req, res) => {
 //   console.log(req.body);
 // })
@@ -108,7 +95,6 @@ app.post("/cart", (req, res) => {
 // app.get("/register", (req, res) => {
 //   res.render('register');
 // });
->>>>>>> master
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
