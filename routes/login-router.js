@@ -5,7 +5,9 @@ const db = require("../db/connection");
 const bcrypt = require("bcryptjs");
 
 router.get("/", (req, res) => {
-  res.render("login");
+  res.render("login", {
+    user: req.session["user_id"]
+  });
 });
 
 // Handle the login form submission
@@ -38,13 +40,14 @@ router.post("/", async (req, res) => {
 
     // Set the session cookie to remember the user
     req.session.user_id = user.id;
-    res.redirect("/");
+    res.redirect("/menu");
   } catch (err) {
-    console.error(err);
     res.render("login", {
       error: "An error occurred. Please try again later.",
     });
   }
 });
+
+module.exports = router;
 
 module.exports = router;

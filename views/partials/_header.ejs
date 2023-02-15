@@ -13,25 +13,23 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light navbar-bg fixed-top">
+  <nav class="fixed-top navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
-      <a class="logo" href="/index">Sushi Time</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <a class="logo" href="#">Sushi Time</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-          <div class="col-10">
-            <a href="/menu" class="navbar-buttons menu-button btn">Menu</a>
-            <a href="/menu" class="navbar-buttons menu-button btn">About Us</a>
-          </div>
-            <a href="/login" class="navbar-buttons menu-button btn">Login</a>
-          <a href="/register" class="navbar-buttons menu-button btn">Register</a>
-        </span>
-        <span>
-          <form action="/cart" method="POST">
-            <button><i class="fa-solid fa-cart-shopping"></i></button>
-          </form>
-        </span>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <% if (user) { %>
+            <span class="navbar-buttons active nav-link">Welcome, <%= userInfo.name %></span>
+            <a class="nav-link active navbar-buttons" aria-current="page" href="/menu">Menu</a>
+            <form action="/logout" method="POST" class="nav-link active navbar-buttons"><button class="logout">Logout</button></form>
+          <% } else { %>
+          <a class="nav-link navbar-buttons active" href="/login">Login</a>
+          <a class="nav-link navbar-buttons active" href="/register">Register</a>
+          <% } %>
+        </div>
       </div>
     </div>
   </nav>
