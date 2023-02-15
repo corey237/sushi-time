@@ -98,6 +98,11 @@ app.get("/", (req, res) => {
 //   res.render('register');
 // });
 
+//click 'Sushi Time' on nav to go back to home page
+app.get("/index", (req, res) => {
+  res.render('index');
+});
+
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });

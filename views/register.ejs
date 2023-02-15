@@ -3,7 +3,7 @@
   Create date: Feb 11, 2023
   Lighthouse Labs Midterm Project
 
-  This is the login page for Sushi Time. The user can use their email and password to login.
+  This is the register page for Sushi Time. The user can use their information to register a new account.
 -->
 <%- include('partials/_header') %>
 <!DOCTYPE html>
@@ -22,12 +22,9 @@
   </head>
 
   <body>
-    <main style="margin-top: 5em">
+    <main style="margin: 4em">
       <div class="card text-center">
-        <div
-          class="card-body d-flex flex-column justify-content-center card text-white bg-dark"
-          style="height: 560px"
-        >
+        <div class="card-body d-flex flex-column justify-content-center card text-black bg-light" style="height: 560px">
           <h3 class="card-title" style="margin-bottom: 30px">
             Create New Account
           </h3>
@@ -88,10 +85,9 @@
                 />
               </div>
               <div class="d-grid gap-2 col-2 mx-auto">
-                <button type="submit" class="btn btn-sm" id="register-button">
-                  Register
-                </button>
-              </div>
+              <button type="submit" class="registerButton">
+                Register
+              </button>
             </div>
           </form>
         </div>
