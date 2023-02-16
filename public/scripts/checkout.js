@@ -75,7 +75,9 @@ $(document).ready(function () {
     for (const id in {...localStorage}) {
       itemIdAndQuantity[id] = localStorage[id];
     }
+      localStorage.clear();
       $.post('/checkout', itemIdAndQuantity);
+
     })
   }) 
 });
