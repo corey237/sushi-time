@@ -45,7 +45,7 @@
           <div class="navbar-nav">
             <% if (user) { %>
             <span class="navbar-buttons active nav-link"
-              >Welcome, <%= userInfo.name %></span
+              >Welcome, <span class="fw-bold"><%= userInfo.name %></span></span
             >
             <a
               class="nav-link active navbar-buttons"
@@ -63,7 +63,7 @@
               class="nav-link active navbar-buttons"
               aria-current="page"
               href="/checkout"
-              ><i class="fa-solid fa-cart-shopping"> </i
+              ><i class="fa-solid fa-cart-shopping" id="shopping-cart"> </i
             ></a>
             <form
               action="/logout"

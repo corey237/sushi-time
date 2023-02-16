@@ -1,4 +1,5 @@
 const db = require("../connection");
+const twilio = require("twilio");
 
 const getOrdersByUserId = (user) => {
   return db
@@ -14,4 +15,49 @@ const getAllOrders = (user) => {
   });
 };
 
-module.exports = { getOrdersByUserId, getAllOrders };
+const markOrderComplete = (orderId) => {
+  return new Promise((resolve, reject) => {
+    const query =
+      "UPDATE orders SET is_completed = TRUE, time_completed = NOW() WHERE id = $1";
+    db.query(query, [orderId], (error, result) => {
+      if (error) {
+        reject(error);
+      } else {
+        resolve(result.rowCount);
+      }
+    });
+  });
+};
+
+const sendSMS = (phoneNumber, message) => {
+  const accountSid = "ACf1bbff9f8a8822870050c97fb52dacab";
+  const authToken = "21fdecd11cff1e0c12247d7f63a696a6";
+  const client = twilio(accountSid, authToken);
+
+  phoneNumber = "+" + phoneNumber;
+
+  client.messages
+    .create({
+      body: message,
+      from: "+12245041906",
+      to: phoneNumber,
+    })
+    .then((message) => console.log(`SMS sent: ${message.sid}`))
+    .catch((error) => console.error(`Error sending SMS: ${error.message}`));
+};
+
+const getOrderById = (orderId) => {
+  return db
+    .query(`SELECT * FROM orders WHERE id = $1`, [orderId])
+    .then((data) => {
+      return data.rows[0];
+    });
+};
+
+module.exports = {
+  getOrdersByUserId,
+  getAllOrders,
+  markOrderComplete,
+  sendSMS,
+  getOrderById,
+};
