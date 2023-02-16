@@ -2,13 +2,11 @@
   Author: Joseph Du
   Create date: Feb 11, 2023
   Lighthouse Labs Midterm Project
-
   This is the login page for Sushi Time. The user can use their email and password to login.
 -->
 <%- include('partials/_header') %>
-  <!DOCTYPE html>
-  <html lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
     <title>Sushi Time 🍣</title>
     <meta charset="UTF-8" />
@@ -30,14 +28,28 @@
           <form class="form-inline" action="/login" method="POST">
             <div class="form-group mb-2 container d-flex flex-column">
               <div class="d-flex flex-column" id="emailEnter">
-                <label class="align-self-start ml-1" for="email">Username:</label>
-                <input class="form-control" type="email" name="email" placeholder="Enter your email as username."
-                  style="width: 300px; margin-bottom: 1em" />
+                <label class="align-self-start ml-1" for="email"
+                  >Username:</label
+                >
+                <input
+                  class="form-control"
+                  type="email"
+                  name="email"
+                  placeholder="Enter your email as username."
+                  style="width: 300px; margin-bottom: 1em"
+                />
               </div>
               <div class="d-flex flex-column" id="passwordEnter">
-                <label class="align-self-start ml-1" for="password">Password:</label>
-                <input class="form-control" type="password" name="password" placeholder="Enter your password here."
-                  style="width: 300px; margin-bottom: 1em" />
+                <label class="align-self-start ml-1" for="password"
+                  >Password:</label
+                >
+                <input
+                  class="form-control"
+                  type="password"
+                  name="password"
+                  placeholder="Enter your password here."
+                  style="width: 300px; margin-bottom: 1em"
+                />
               </div>
               <button type="submit" class="loginButton">
                 Log in
@@ -48,5 +60,4 @@
       </div>
     </main>
   </body>
-
-  </html>
+</html>
