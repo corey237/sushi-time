@@ -40,6 +40,13 @@ input[name="quantity"] {
 
 .add-to-cart {
   background-color: #ff782e;
+  border: 2px solid #ff782e;
+  color: #FFFFFF;
+}
+.add-to-cart:active {
+  background-color: #a13e00;
+  border: 2px solid #a13e00;
+  color: #FFFFFF;
 }
 
 .error-message {
@@ -51,3 +58,14 @@ input[name="quantity"] {
   padding-bottom: -2px;
   border: 2px solid rgba($color: lightblue, $alpha: 0.3);
 }
+
+.add-to-cart:hover {
+  background-color: #a13e00;
+  border: 2px solid #a13e00;
+  color: #FFFFFF;
+}
+
+
+
+
+
