@@ -16,9 +16,13 @@
   border-bottom: none;
 }
 
+.logo:hover {
+  color: #e96310;
+}
+
 .navbar-buttons {
   font-family: "Lato", sans-serif;
-  color: #ff782e !important;
+  color: #f36214 !important;
   margin-left: 20px;
   font-size: 20px;
   text-align: center;
@@ -27,24 +31,9 @@
 .logout {
   all: unset;
 }
-// .navbar-buttons:hover {
-//   background-color: #ff782e;
-//   color: #ffffff;
-// }
 
 .fa-cart-shopping {
   color: #ff782e;
+  letter-spacing: 4px;
 }
 
-// .btn-primary {
-//   border: none;
-// }
-
-// .btn-primary:hover {
-//   background-color: #bd4907;
-// }
-
-// .email {
-//   margin-top: 25px;
-//   margin-left: 75px;
-// }
