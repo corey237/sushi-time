@@ -56,6 +56,7 @@ const menuRouter = require("./routes/menu-router");
 const checkoutRouter = require("./routes/checkout-router")
 const itemsRouter = require("./routes/items-router")
 
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -64,7 +65,7 @@ app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
-app.use("/logout", logoutRouter)
+app.use("/logout", logoutRouter);
 app.use("/orders", ordersRouter);
 app.use("/menu", menuRouter);
 app.use("/checkout", checkoutRouter);
@@ -104,7 +105,7 @@ app.get("/", (req, res) => {
 
 //click 'Sushi Time' on nav to go back to home page
 app.get("/index", (req, res) => {
-  res.render('index');
+  res.render("index");
 });
 
 

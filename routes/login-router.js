@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
     res.redirect("/menu");
   }
   res.render("login", {
-    user: req.session["user_id"]
+    user: req.session["user_id"],
   });
 });
 
@@ -29,7 +29,10 @@ router.post("/", async (req, res) => {
     const user = result.rows[0];
 
     if (!user) {
-      res.render("login", { user: req.session["user_id"], error: "Invalid email or password." });
+      res.render("login", {
+        user: req.session["user_id"],
+        error: "Invalid email or password.",
+      });
       return;
     }
 
@@ -37,7 +40,10 @@ router.post("/", async (req, res) => {
      const isMatch = await bcrypt.compare(password, user.password);
     console.log('isMatch', isMatch);
     if (!isMatch) {
-      res.render("login", { user: req.session["user_id"], error: "Invalid email or password." });
+      res.render("login", {
+        user: req.session["user_id"],
+        error: "Invalid email or password.",
+      });
       return;
     }
     // Set the session cookie to remember the user

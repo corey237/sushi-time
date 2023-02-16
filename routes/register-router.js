@@ -5,6 +5,7 @@ const cookieSession = require("cookie-session");
 const db = require("../db/connection");
 const { getUserByEmail, insertUser } = require("../db/queries/userHelpers");
 
+
 router.get("/", (req, res) => {
   if (req.session["user_id"]) {
     res.redirect("menu")
@@ -12,7 +13,7 @@ router.get("/", (req, res) => {
   res.render("register", { error: null, user: req.session["user_id"] });
 });
 
-router.post("/", (req, res) => {  
+router.post("/", (req, res) => {
   getUserByEmail(req.body.email)
     .then((user) => {
       console.log(user);

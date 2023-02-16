@@ -253,3 +253,4 @@ $(document).ready(function () {
     $('.souffle-pancakes-price').prepend(successMessage);
   });
 });
+

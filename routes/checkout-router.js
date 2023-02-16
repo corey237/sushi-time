@@ -4,11 +4,10 @@ const cookieSession = require('cookie-session');
 const { getUserById, getItemsByIds, placeOrder } = require("../db/queries/userHelpers");
 
 router.get("/", (req, res) => {
-  getUserById(req.session["user_id"])
-  .then((response) => {
+  getUserById(req.session["user_id"]).then((response) => {
     res.render("checkout", {
       user: req.session["user_id"],
-      userInfo: response
+      userInfo: response,
     });
   });
 });
