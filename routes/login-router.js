@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 // Handle the login form submission
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
+  //console.log(req.body);
 
   // Find the user in the database by email
   const query = {
@@ -37,8 +37,8 @@ router.post("/", async (req, res) => {
     }
 
     // Check if the password matches using bcrypt
-    const isMatch = await bcrypt.compare(password, user.password);
-
+     const isMatch = await bcrypt.compare(password, user.password);
+    console.log('isMatch', isMatch);
     if (!isMatch) {
       res.render("login", {
         user: req.session["user_id"],
@@ -46,10 +46,9 @@ router.post("/", async (req, res) => {
       });
       return;
     }
-
     // Set the session cookie to remember the user
     req.session.user_id = user.id;
-    res.redirect("/menu");
+    res.redirect("menu");
   } catch (err) {
     res.render("login", {
       error: "An error occurred. Please try again later.",
