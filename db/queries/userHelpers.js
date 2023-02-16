@@ -53,10 +53,66 @@ const isAdmin = (id) => {
   return db.query(query, [id]).then((result) => result.rows[0].is_admin);
 };
 
+const getItemsByIds = function (ids) {
+  const placeholderClause = ids
+    .map((element, index) => {
+      return `$${index + 1}`;
+    })
+    .join(",");
+  const sqlQuery = `
+  SELECT *
+  FROM items
+  WHERE id IN (${placeholderClause})
+  `;
+  return db.query(sqlQuery, ids).then((result) => {
+    return result.rows;
+  });
+};
+
+const placeOrder = function (total, itemQuantities, userId) {
+  const insertOrderQuery = `
+  INSERT INTO orders (user_id, total_cost)
+  VALUES
+  ($1, $2)
+  RETURNING id
+  `;
+  let insertOrderItemsQuery = `
+  INSERT INTO items_in_order (order_id, item_id, quantity)
+  VALUES
+  `;
+
+  insertOrderItemsQuery += Object.keys(itemQuantities)
+    .map((itemId, index) => {
+      return `($${index * 3 + 1}, $${index * 3 + 2}, $${index * 3 + 3})`;
+    })
+    .join(", ");
+
+  console.log("insertItemsOrderQuery Is: ", insertOrderItemsQuery);
+  return db.query(insertOrderQuery, [userId, total]).then((newOrderResult) => {
+    const orderId = newOrderResult.rows[0].id;
+    const orderItemsQueryValues = Object.keys(itemQuantities)
+      .map((itemId) => {
+        return [orderId, itemId, itemQuantities[itemId]];
+      })
+      .flat();
+    console.log("orderItemsQueryValues is: ", orderItemsQueryValues);
+    return db.query(insertOrderItemsQuery, orderItemsQueryValues);
+  });
+};
+
+const getItems = function () {
+  const sqlQuery = `SELECT * FROM items`;
+  return db.query(sqlQuery).then((items) => {
+    return items.rows;
+  });
+};
+
 module.exports = {
   getUserByEmail,
   insertUser,
   validateEmailAndPassword,
   getUserById,
+  getItemsByIds,
+  placeOrder,
   isAdmin,
 };
