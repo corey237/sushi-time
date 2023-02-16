@@ -16,3 +16,29 @@
   background-color: #ff782e;
   border: 2px solid #ff782e;
 }
+
+main {
+  margin-top: 120px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+input[type=email] {
+  width: 300px;
+  margin-bottom: 1em;
+}
+
+input[type=password] {
+  width: 300px;
+  margin-bottom: 1em;
+}
+
+@media only screen and (max-width: 600px) {
+  input[type=email] {
+    width: auto;
+  }
+
+  input[type=password] {
+    width: auto;
+  }
+}
