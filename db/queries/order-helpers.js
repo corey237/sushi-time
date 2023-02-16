@@ -54,10 +54,25 @@ const getOrderById = (orderId) => {
     });
 };
 
+const updateOrderEstimatedTime = (orderId, estimatedTime) => {
+  const query = {
+    text: `
+      UPDATE orders
+      SET time_estimated = $1
+      WHERE id = $2
+      RETURNING *
+    `,
+    values: [estimatedTime, orderId],
+  };
+
+  return db.query(query).then((result) => result.rows[0]);
+};
+
 module.exports = {
   getOrdersByUserId,
   getAllOrders,
   markOrderComplete,
   sendSMS,
   getOrderById,
+  updateOrderEstimatedTime,
 };
