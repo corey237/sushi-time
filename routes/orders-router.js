@@ -55,7 +55,7 @@ router.post("/complete", async (req, res) => {
     const user = await userQueries.getUserById(order.user_id);
 
     // Send a order complete sms to the user
-    const message = `Order #${order.id} for ${user.name} is now completed. Thank you for ordering!`;
+    const message = `Order #${order.id} for ${user.name} is now completed and ready for pick up. Thank you for ordering!`;
     orderQueries.sendSMS(user.phone_number, message);
 
     // Redirect to the orders page
