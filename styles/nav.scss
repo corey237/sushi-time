@@ -68,3 +68,16 @@ nav {
 .btn-primary:hover {
   background-color: #bd4907;
 }
+
+@media only screen and (max-width: 1024px) {
+  .navbarClass {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #navbarLink {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+  }
+}
