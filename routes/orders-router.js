@@ -55,7 +55,7 @@ router.post("/complete", async (req, res) => {
     const user = await userQueries.getUserById(order.user_id);
 
     // Send a order complete sms to the user
-    const message = `Order #${order.id} for ${user.name} is now completed. Thank you for ordering!`;
+    const message = `Order #${order.id} for ${user.name} is now completed and ready for pick up. Thank you for ordering!`;
     orderQueries.sendSMS(user.phone_number, message);
 
     // Redirect to the orders page
@@ -68,6 +68,41 @@ router.post("/complete", async (req, res) => {
     res
       .status(500)
       .send(`Error marking order ${orderId} as complete: ${error.message}`);
+  }
+});
+
+// POST orders/estimated
+router.post("/estimated", async (req, res) => {
+  const orderId = req.body.orderId;
+  const estimatedPreparationTime = req.body.estimatedPreparationTime;
+
+  try {
+    // Update the order in the db with the estimated preparation time
+    await orderQueries.updateOrderEstimatedTime(
+      orderId,
+      estimatedPreparationTime
+    );
+
+    // Get the user information associated with the order
+    const order = await orderQueries.getOrderById(orderId);
+    const user = await userQueries.getUserById(order.user_id);
+
+    // Send a confirmation sms to the user
+    const message = `Thank you for your order #${order.id}! The estimated preparation time is ${estimatedPreparationTime} minutes. We'll let you know when it's ready.`;
+    orderQueries.sendSMS(user.phone_number, message);
+
+    // Redirect to the orders page
+    res.redirect(`/orders/`);
+  } catch (error) {
+    console.error(error.message);
+    console.error(error);
+
+    // If an error occurs, return an error message
+    res
+      .status(500)
+      .send(
+        `Error updating order ${orderId} with estimated preparation time: ${error.message}`
+      );
   }
 });
 module.exports = router;

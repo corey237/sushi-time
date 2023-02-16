@@ -1,5 +1,7 @@
 const db = require("../connection");
 const twilio = require("twilio");
+const accountSid = process.env.TWILIO_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
 
 const getOrdersByUserId = (user) => {
   return db
@@ -30,8 +32,6 @@ const markOrderComplete = (orderId) => {
 };
 
 const sendSMS = (phoneNumber, message) => {
-  const accountSid = "ACf1bbff9f8a8822870050c97fb52dacab";
-  const authToken = "895993adfd5dceca23307a682157ec05";
   const client = twilio(accountSid, authToken);
 
   phoneNumber = "+" + phoneNumber;
@@ -54,10 +54,25 @@ const getOrderById = (orderId) => {
     });
 };
 
+const updateOrderEstimatedTime = (orderId, estimatedTime) => {
+  const query = {
+    text: `
+      UPDATE orders
+      SET time_estimated = $1
+      WHERE id = $2
+      RETURNING *
+    `,
+    values: [estimatedTime, orderId],
+  };
+
+  return db.query(query).then((result) => result.rows[0]);
+};
+
 module.exports = {
   getOrdersByUserId,
   getAllOrders,
   markOrderComplete,
   sendSMS,
   getOrderById,
+  updateOrderEstimatedTime,
 };
