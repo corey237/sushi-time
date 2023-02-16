@@ -35,10 +35,7 @@ router.get("/", async (req, res) => {
     res.render("orders", { user: user_id, userInfo, orders, isAdmin });
   } catch (error) {
     console.error(error);
-    req.flash(
-      "error",
-      "An error occurred while processing your request. Please try again later."
-    );
+    res.status(500).send("You don't have any orders yet!");
     res.redirect("/");
   }
 });
