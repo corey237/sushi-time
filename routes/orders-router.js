@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
 
       // If not, get the orders associated with the user ID
     } else {
-      orders = await userQueries.getOrdersByUserId(user_id);
+      orders = await orderQueries.getOrdersByUserId(user_id);
     }
 
     // Render the orders page with the orders and user information

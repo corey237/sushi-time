@@ -31,7 +31,7 @@ const markOrderComplete = (orderId) => {
 
 const sendSMS = (phoneNumber, message) => {
   const accountSid = "ACf1bbff9f8a8822870050c97fb52dacab";
-  const authToken = "21fdecd11cff1e0c12247d7f63a696a6";
+  const authToken = "895993adfd5dceca23307a682157ec05";
   const client = twilio(accountSid, authToken);
 
   phoneNumber = "+" + phoneNumber;

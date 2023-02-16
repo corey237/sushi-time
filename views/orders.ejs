@@ -83,7 +83,7 @@
                 <form action="/orders/complete" method="POST">
                   <input type="hidden" name="orderId" value="<%= order.id %>">
                   <% if (order.is_completed) { %>
-                    <button type="submit" disabled>Order Completed</button>
+                    <button type="submit" >Order Completed</button>
                   <% } else { %>
                     <button type="submit">Complete Order</button>
                   <% } %>
