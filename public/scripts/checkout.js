@@ -77,7 +77,8 @@ $(document).ready(function () {
     }
       localStorage.clear();
       $.post('/checkout', itemIdAndQuantity);
-
+      window.location.replace('/orders')
+      
     })
   }) 
 });

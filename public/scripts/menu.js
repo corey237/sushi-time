@@ -1,5 +1,13 @@
 $(document).ready(function () {
-  
+  const calculateCartQuantity = function() {
+    let total = 0;
+    for (item in {...localStorage}) {
+      total += Number(localStorage[item])
+    }
+    return total;
+  }
+  $(".fa-cart-shopping").html(calculateCartQuantity());
+
   //Function for checking if quantity is invalid, return error if it is.
   const errorCheck = function(className) {
     const quantity = Number($(`.${className}`).val());
