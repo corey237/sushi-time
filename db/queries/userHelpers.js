@@ -103,16 +103,4 @@ const placeOrder = function(total, itemQuantities, userId) {
   })
 }
 
-
-
-const getItems = function() {
-  const sqlQuery = `SELECT * FROM items`
-  return db.query(sqlQuery)
-  .then(items => {
-    return items.rows
-  })
-};
-
-
-
 module.exports = {getUserByEmail, insertUser, validateEmailAndPassword, getUserById, getItemsByIds, placeOrder};

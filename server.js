@@ -10,6 +10,7 @@ const cookieSession = require("cookie-session");
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+
 app.set("view engine", "ejs");
 
 app.use(
@@ -49,10 +50,11 @@ const usersRoutes = require("./routes/users");
 const loginRouter = require("./routes/login-router");
 const registerRouter = require("./routes/register-router");
 const logoutRouter = require("./routes/logout-router");
-const { getUserById } = require("./db/queries/userHelpers");
+const { getUserById, getItems } = require("./db/queries/userHelpers");
 const ordersRouter = require("./routes/orders-router");
 const menuRouter = require("./routes/menu-router");
 const checkoutRouter = require("./routes/checkout-router")
+const itemsRouter = require("./routes/items-router")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -66,6 +68,7 @@ app.use("/logout", logoutRouter)
 app.use("/orders", ordersRouter);
 app.use("/menu", menuRouter);
 app.use("/checkout", checkoutRouter);
+app.use("/items", itemsRouter)
 
 // Note: mount other resources here, using the same pattern above
 
@@ -74,20 +77,36 @@ app.use("/checkout", checkoutRouter);
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  getUserById(req.session["user_id"])
+  if(req.session['user_id']) {
+    getUserById(req.session["user_id"])
     .then((response) => {
-      
-      res.render("index", {
-        user: req.session["user_id"],
-        userInfo: response
-      });
+      console.log(response);
+      if (response) {
+        res.render("index", {
+          user: req.session["user_id"],
+          userInfo: response
+        });
+      } else {
+        res.render("index", {
+          user: null,
+          userInfo: null
+        });
+      }
     });
+  } else {
+    //Error handling
+    res.render("index", {
+      user: null,
+      userInfo: null
+    });
+  }
 });
 
 //click 'Sushi Time' on nav to go back to home page
 app.get("/index", (req, res) => {
   res.render('index');
 });
+
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);

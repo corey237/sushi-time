@@ -30,7 +30,7 @@ $(document).ready(function () {
     $(".fa-cart-shopping").html(cartCounter);
 
     //Add item and quantity to local storage.
-    localStorage.setItem("misoSoup", quantity);
+    localStorage.setItem("1", quantity);
     $(".miso-soup-quantity").val("");
     $('.miso-soup-price').prepend(successMessage);
   });
@@ -54,7 +54,7 @@ $(document).ready(function () {
     $(".onigiri-quantity").val("");
 
     //Add item and quantity to local storage.
-    localStorage.setItem("onigiri", quantity);
+    localStorage.setItem("2", quantity);
     $('.onigiri-price').prepend(successMessage);
   });
 
@@ -75,7 +75,7 @@ $(document).ready(function () {
     $(".fa-cart-shopping").html(cartCounter);
     $(".tofu-quantity").val("");
     //add item and quantity to local storage
-    localStorage.setItem("tofu", quantity);
+    localStorage.setItem("3", quantity);
     $('.tofu-price').prepend(successMessage);
   });
 
@@ -95,7 +95,7 @@ $(document).ready(function () {
     $(".fa-cart-shopping").html(cartCounter);
     $(".adamame-quantity").val("");
     //Add item and quantity to local storage
-    localStorage.setItem("adamame", quantity);
+    localStorage.setItem("4", quantity);
     $('.adamame-price').prepend(successMessage);
   });
 
@@ -117,7 +117,7 @@ $(document).ready(function () {
     $(".fa-cart-shopping").html(cartCounter);
     $(".california-rolls-quantity").val("");
      //Add item and quantity to local storage
-    localStorage.setItem("californiaRolls", quantity);
+    localStorage.setItem("5", quantity);
     $('.california-rolls-price').prepend(successMessage);
   });
 
@@ -136,7 +136,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".chicken-teriyaki-quantity").val("");
-    localStorage.setItem("chickenTeriyaki", quantity);
+    localStorage.setItem("6", quantity);
     $('.chicken-teriyaki-price').prepend(successMessage);
   });
   
@@ -155,7 +155,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".shrimp-tempura-quantity").val("");
-    localStorage.setItem("shrimpTempura", quantity);
+    localStorage.setItem("7", quantity);
     $('.shrimp-tempura-price').prepend(successMessage);
   });
 
@@ -173,7 +173,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".cucumber-rolls-quantity").val("");
-    localStorage.setItem("cucumberRolls", quantity);
+    localStorage.setItem("8", quantity);
     $('.cucumber-roll-price').prepend(successMessage);
   });
 
@@ -193,7 +193,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".ice-cream-quantity").val("");
-    localStorage.setItem("iceCream", quantity);
+    localStorage.setItem("9", quantity);
     $('.ice-cream-price').prepend(successMessage);
   });
 
@@ -211,7 +211,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".dorayaki-quantity").val("");
-    localStorage.setItem("dorayaki", quantity);
+    localStorage.setItem("10", quantity);
     $('.dorayaki-price').prepend(successMessage);
   });
   
@@ -231,7 +231,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".japenese-cheesecake-quantity").val("");
-    localStorage.setItem("japeneseCheesecake", quantity);
+    localStorage.setItem("11", quantity);
     $('.japenese-cheesecake-price').prepend(successMessage);
   });
   
@@ -249,7 +249,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".souffle-pancakes-quantity").val("");
-    localStorage.setItem("soufflePancakes", quantity);
+    localStorage.setItem("12", quantity);
     $('.souffle-pancakes-price').prepend(successMessage);
   });
 });
