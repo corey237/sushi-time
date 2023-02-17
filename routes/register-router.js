@@ -24,7 +24,7 @@ router.post("/", (req, res) => {
             res.redirect('menu');
           });
       } else {
-        return res.render('register', {error: 'Error: User already exists'});
+        return res.render('register', {error: 'Error: User already exists', user: null});
       }
     })
 })
