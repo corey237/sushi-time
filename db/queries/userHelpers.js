@@ -9,7 +9,6 @@ const getUserByEmail = function (email) {
   });
 };
 
-
 const insertUser = function (name, email, password, phoneNumber) {
   const insert = `
         INSERT INTO users (name, email, password, phone_number)
@@ -93,28 +92,24 @@ const placeOrder = function (total, itemQuantities, userId) {
     const orderId = newOrderResult.rows[0].id;
     //Send a text message to the restaurant with the order details
 
-
-
     const orderItemsQueryValues = Object.keys(itemQuantities)
       .map((itemId) => {
         return [orderId, itemId, itemQuantities[itemId]];
       })
       .flat();
     console.log("orderItemsQueryValues is: ", orderItemsQueryValues);
-    return db.query(insertOrderItemsQuery, orderItemsQueryValues)
-    .then(() => {
+    return db.query(insertOrderItemsQuery, orderItemsQueryValues).then(() => {
       const orderDetailsQuery = `
       SELECT items.item_name, items_in_order.quantity
-      FROM items_in_order 
+      FROM items_in_order
       JOIN items on items.id = item_id
       JOIN orders on orders.id = items_in_order.order_id
       WHERE orders.id = $1
       GROUP BY items_in_order.quantity, items.item_name;
-      `
-       db.query(orderDetailsQuery, [orderId])
-      .then((order) => {
-        let txtMessageStr = 'Order Received!\n';
-        txtMessageStr += `Order #${orderId}. Here are the order details:\n`
+      `;
+      db.query(orderDetailsQuery, [orderId]).then((order) => {
+        let txtMessageStr = "Order Received!\n";
+        txtMessageStr += `Order #${orderId}. Here are the order details:\n`;
         for (const item of order.rows) {
           txtMessageStr += `x${item.quantity} ${item.item_name}\n`;
           //Send SMS notification to restaurant
@@ -123,10 +118,9 @@ const placeOrder = function (total, itemQuantities, userId) {
           // sendSMS("16479846313", txtMessageStr);
         }
       });
-    })
+    });
   });
 };
-
 
 const getItems = function () {
   const sqlQuery = `SELECT * FROM items`;
@@ -134,7 +128,6 @@ const getItems = function () {
     return items.rows;
   });
 };
-
 
 module.exports = {
   getUserByEmail,
