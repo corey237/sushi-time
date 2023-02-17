@@ -88,7 +88,7 @@ router.post("/estimated", async (req, res) => {
     const user = await userQueries.getUserById(order.user_id);
 
     // Send a confirmation sms to the user
-    const message = `Your order number is #${order.id}! The estimated preparation time is ${estimatedPreparationTime} minutes. We'll let you know when it's ready.`;
+    const message = `Thank you for your order #${order.id}! The estimated preparation time is ${estimatedPreparationTime} minutes. We'll let you know when it's ready.`;
     orderQueries.sendSMS(user.phone_number, message);
 
     // Redirect to the orders page

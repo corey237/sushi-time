@@ -9,7 +9,6 @@ const getUserByEmail = function (email) {
   });
 };
 
-
 const insertUser = function (name, email, password, phoneNumber) {
   const insert = `
         INSERT INTO users (name, email, password, phone_number)
@@ -106,9 +105,10 @@ const placeOrder = function (total, itemQuantities, userId) {
       FROM items_in_order
       JOIN items on items.id = item_id
       JOIN orders on orders.id = items_in_order.order_id
-      WHERE orders.id = $1;
+      WHERE orders.id = $1
+      GROUP BY items_in_order.quantity, items.item_name;
       `;
-    return db.query(orderDetailsQuery, [orderId]).then((order) => {
+      db.query(orderDetailsQuery, [orderId]).then((order) => {
         let txtMessageStr = "Order Received!\n";
         txtMessageStr += `Order #${orderId}. Here are the order details:\n`;
         for (const item of order.rows) {
@@ -127,7 +127,6 @@ const getItems = function () {
     return items.rows;
   });
 };
-
 
 module.exports = {
   getUserByEmail,

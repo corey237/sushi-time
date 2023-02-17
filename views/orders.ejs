@@ -26,10 +26,11 @@
         </h3>
       </div>
 
-      <% if (isAdmin) { %> <% orders.sort((a, b) => b.time_placed -
-      a.time_placed).forEach(order => { %>
       <div class="card rounded-3 mb-4">
-        <table class="table table-hover table-striped" id="orders-table">
+        <table
+          class="table table-hover table-striped table-fixed"
+          id="orders-table"
+        >
           <thead class="orders-table-head">
             <tr>
               <th scope="col">Order #</th>
@@ -42,6 +43,8 @@
               <th scope="col">Complete Order</th>
             </tr>
           </thead>
+          <% if (isAdmin) { %> <% orders.sort((a, b) => b.time_placed -
+          a.time_placed).forEach(order => { %>
           <tbody>
             <tr>
               <td><%= order.id %></td>
@@ -54,13 +57,19 @@
               <td>
                 <form action="/orders/estimated" method="POST">
                   <input type="hidden" name="orderId" value="<%= order.id %>" />
+
                   <input
+                    class="form-control-sm"
                     type="number"
-                    id="estimatedTime"
-                    name="estimatedTime"
+                    id="estimatedPreparationTime"
+                    name="estimatedPreparationTime"
                     required
                   />
-                  <button type="submit">Send</button>
+                  <% if (order.time_estimated) { %>
+                  <button class="btn" type="submit" disabled>Sent</button>
+                  <% } else { %>
+                  <button class="btn" type="submit">Send</button>
+                  <% } %>
                 </form>
               </td>
               <td>$<%= order.total_cost %></td>
@@ -72,17 +81,21 @@
                 <% } %>
               </td>
               <td>
-                <%= new Date(order.time_completed).toLocaleString('en-US', {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-                hour: 'numeric', minute: 'numeric', }) %>
+                <% if (order.time_completed === null) { %> <%=
+                order.time_completed %> <% } else { %> <%= new
+                Date(order.time_completed).toLocaleString('en-US', { weekday:
+                'long', year: 'numeric', month: 'long', day: 'numeric', hour:
+                'numeric', minute: 'numeric', }) %> <% } %>
               </td>
               <td>
                 <form action="/orders/complete" method="POST">
                   <input type="hidden" name="orderId" value="<%= order.id %>" />
                   <% if (order.is_completed) { %>
-                  <button type="submit">Order Completed</button>
+                  <button class="btn" type="submit" disabled>
+                    Order Completed
+                  </button>
                   <% } else { %>
-                  <button type="submit">Complete Order</button>
+                  <button class="btn" type="submit">Complete Order</button>
                   <% } %>
                 </form>
               </td>
@@ -94,7 +107,10 @@
       <% } else { %> <% orders.sort((a, b) => b.time_placed -
       a.time_placed).forEach(order => { %>
       <div class="card rounded-3 mb-4">
-        <table class="table table-hover table-striped" id="orders-table">
+        <table
+          class="table table-hover table-striped table-fixed"
+          id="orders-table"
+        >
           <thead class="orders-table-head">
             <tr>
               <th scope="col">Order #</th>
@@ -103,7 +119,7 @@
 
               <th scope="col">Total</th>
               <th scope="col">Completed</th>
-              <th scope="col">Completed at</th>
+              <th width="100" scope="col">Completed at</th>
             </tr>
           </thead>
           <tbody>
