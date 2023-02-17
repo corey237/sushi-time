@@ -26,9 +26,6 @@ router.post("/", (req, res) => {
       total += item.price * req.body[item.id];
     }
     placeOrder(total, req.body, req.session["user_id"]).then((orderId) => {
-      // Send SMS notification to restaurant
-      const orderDetails = `Order #${orderId}: ${JSON.stringify(req.body)}`;
-      orderQueries.sendSMS("16479846313", orderDetails);
       res.redirect("orders");
     });
   });

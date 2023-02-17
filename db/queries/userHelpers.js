@@ -1,5 +1,6 @@
 const db = require("../connection");
 const bcrypt = require("bcryptjs");
+const { sendSMS } = require("./order-helpers");
 
 const getUserByEmail = function (email) {
   const sqlQuery = `SELECT * FROM users WHERE email = $1`;
@@ -7,6 +8,7 @@ const getUserByEmail = function (email) {
     return response.rows[0];
   });
 };
+
 
 const insertUser = function (name, email, password, phoneNumber) {
   const insert = `
@@ -87,18 +89,44 @@ const placeOrder = function (total, itemQuantities, userId) {
     })
     .join(", ");
 
-  console.log("insertItemsOrderQuery Is: ", insertOrderItemsQuery);
   return db.query(insertOrderQuery, [userId, total]).then((newOrderResult) => {
     const orderId = newOrderResult.rows[0].id;
+    //Send a text message to the restaurant with the order details
+
+
+
     const orderItemsQueryValues = Object.keys(itemQuantities)
       .map((itemId) => {
         return [orderId, itemId, itemQuantities[itemId]];
       })
       .flat();
     console.log("orderItemsQueryValues is: ", orderItemsQueryValues);
-    return db.query(insertOrderItemsQuery, orderItemsQueryValues);
+    return db.query(insertOrderItemsQuery, orderItemsQueryValues)
+    .then(() => {
+      const orderDetailsQuery = `
+      SELECT items.item_name, items_in_order.quantity
+      FROM items_in_order 
+      JOIN items on items.id = item_id
+      JOIN orders on orders.id = items_in_order.order_id
+      WHERE orders.id = $1
+      GROUP BY items_in_order.quantity, items.item_name;
+      `
+       db.query(orderDetailsQuery, [orderId])
+      .then((order) => {
+        let txtMessageStr = 'Order Received!\n';
+        txtMessageStr += `Order #${orderId}. Here are the order details:\n`
+        for (const item of order.rows) {
+          txtMessageStr += `x${item.quantity} ${item.item_name}\n`;
+          //Send SMS notification to restaurant
+          sendSMS("16479846313", txtMessageStr);
+          //Send SMS notification to user, Keeping it commented to avoid dupliocate messages
+          // sendSMS("16479846313", txtMessageStr);
+        }
+      });
+    })
   });
 };
+
 
 const getItems = function () {
   const sqlQuery = `SELECT * FROM items`;
@@ -106,6 +134,7 @@ const getItems = function () {
     return items.rows;
   });
 };
+
 
 module.exports = {
   getUserByEmail,
