@@ -18,7 +18,6 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
   const ids = Object.keys(req.body);
   getItemsByIds(ids).then((items) => {
     let total = 0;

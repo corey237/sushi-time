@@ -73,9 +73,9 @@ const getItemsByIds = function (ids) {
 
 const placeOrder = function (total, itemQuantities, userId) {
   const insertOrderQuery = `
-  INSERT INTO orders (user_id, total_cost)
+  INSERT INTO orders (user_id, total_cost, time_placed)
   VALUES
-  ($1, $2)
+  ($1, $2, NOW())
   RETURNING id
   `;
   let insertOrderItemsQuery = `
