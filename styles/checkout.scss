@@ -23,3 +23,35 @@
   border: 2px solid #a13e00;
   color: #FFFFFF;
 }
+
+.order-button-container {
+  display: flex;
+  justify-content: end;
+}
+
+
+
+
+@media only screen and (max-width: 1024px) {
+  .item-name {
+    margin-top: 10px;
+    text-align: center;
+    
+  }
+  .item-quantity {
+    justify-content: center;
+    text-align: center;
+  }
+  .total-container {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .delete-item {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .order-button-container {
+    display: flex;
+    justify-content: center;
+  }
+}

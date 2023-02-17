@@ -32,14 +32,14 @@ $(document).ready(function () {
              />
            </div>
            <div class="col-md-3 col-lg-3 col-xl-3">
-             <p>
+             <p class="item-name">
                <span class="text-muted">${
                  items.find((item) => Number(item.id) === Number(itemId))
                    .item_name
                }</span
              </p>
            </div>
-           <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+           <div class="col-md-3 col-lg-3 col-xl-2 d-flex item-quantity">
              <input
                id="${
                  items.find((item) => Number(item.id) === Number(itemId)).id
@@ -55,7 +55,7 @@ $(document).ready(function () {
                class="form-control form-control-sm w-50 item-quantity"
              />
            </div>
-           <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+           <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 total-container">
              <h5 class="mb-0 item-total" id="${
                items.find((item) => Number(item.id) === Number(itemId)).id
              }">$${(
@@ -65,7 +65,7 @@ $(document).ready(function () {
         )
       ).toFixed(2)}</h5>
            </div>
-           <div class="col-md-1 col-lg-1 col-xl-1">
+           <div class="col-md-1 col-lg-1 col-xl-1 delete-item">
              <i class="fas fa-trash fa-lg text-danger" id='${
                items.find((item) => Number(item.id) === Number(itemId)).id
              }'></i>
