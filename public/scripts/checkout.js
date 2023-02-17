@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  //Do ajax request to receive menu items, render the page based on item choices in local storage
   $.ajax({
     url: "/items",
     datatype: "json",
@@ -76,6 +77,8 @@ $(document).ready(function () {
     }
     calculateTotal();
     $(".total-cost").html(`$${total.toFixed(2)}`);
+    
+    //If trash icon is clicked, remove item from page, local storage and adjust total
     $(".fa-trash").on("click", function () {
       const itemId = $(this).attr("id");
       $(`.${itemId}`).remove();
@@ -87,6 +90,8 @@ $(document).ready(function () {
       $(".total-cost").html(`$${newTotal.toFixed(2)}`);
     });
 
+    
+    //If quantity is adjusted, adjust item totals
     $(".item-quantity").on("click", function () {
       const itemId = $(this).attr("id").replace("-quantity", "");
       const itemPrice = items.find(
@@ -102,6 +107,7 @@ $(document).ready(function () {
       $(".total-cost").html(`$${total.toFixed(2)}`);
     });
 
+    //On order submit, grab item choices from local storage and submit the item id's and quantities to /checkout, redirect to /orders on completion
     $(".order-button").on("click", function () {
       const itemIdAndQuantity = {};
       for (const id in { ...localStorage }) {
@@ -113,4 +119,3 @@ $(document).ready(function () {
     });
   });
 });
-

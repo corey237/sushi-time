@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
   }
   res.render("login", {
     user: req.session["user_id"],
+    error: null
   });
 });
 
@@ -31,7 +32,7 @@ router.post("/", async (req, res) => {
     if (!user) {
       res.render("login", {
         user: req.session["user_id"],
-        error: "Invalid email or password.",
+        error: "Invalid email or password. Please try again.",
       });
       return;
     }
@@ -42,7 +43,7 @@ router.post("/", async (req, res) => {
     if (!isMatch) {
       res.render("login", {
         user: req.session["user_id"],
-        error: "Invalid email or password.",
+        error: "Invalid email or password. Please try again.",
       });
       return;
     }
@@ -51,7 +52,7 @@ router.post("/", async (req, res) => {
     res.redirect("menu");
   } catch (err) {
     res.render("login", {
-      error: "An error occurred. Please try again later.",
+      error: "Invalid email or password. Please try again.",
     });
   }
 });

@@ -239,7 +239,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".japenese-cheesecake-quantity").val("");
-    localStorage.setItem("11", quantity);
+    localStorage.setItem("12", quantity);
     $('.japenese-cheesecake-price').prepend(successMessage);
   });
   
@@ -257,8 +257,7 @@ $(document).ready(function () {
     cartCounter += quantity;
     $(".fa-cart-shopping").html(cartCounter);
     $(".souffle-pancakes-quantity").val("");
-    localStorage.setItem("12", quantity);
+    localStorage.setItem("11", quantity);
     $('.souffle-pancakes-price').prepend(successMessage);
   });
 });
-
