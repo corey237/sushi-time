@@ -8,7 +8,12 @@ const {
 } = require("../db/queries/userHelpers");
 const orderQueries = require("../db/queries/order-helpers");
 
+
 router.get("/", (req, res) => {
+  if(!req.session["user_id"]) {
+    res.redirect('/login')
+  }
+
   getUserById(req.session["user_id"]).then((response) => {
     res.render("checkout", {
       user: req.session["user_id"],

@@ -46,7 +46,6 @@ app.use(
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const userApiRoutes = require("./routes/users-api");
 const widgetApiRoutes = require("./routes/widgets-api");
 const usersRoutes = require("./routes/users");
 const loginRouter = require("./routes/login-router");
@@ -56,12 +55,11 @@ const { getUserById, getItems } = require("./db/queries/userHelpers");
 const ordersRouter = require("./routes/orders-router");
 const menuRouter = require("./routes/menu-router");
 const checkoutRouter = require("./routes/checkout-router");
-const itemsRouter = require("./routes/items-router");
+const itemsRouter = require("./routes/items-router")
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
-app.use("/api/users", userApiRoutes);
 app.use("/api/widgets", widgetApiRoutes);
 app.use("/users", usersRoutes);
 app.use("/register", registerRouter);
@@ -70,7 +68,7 @@ app.use("/logout", logoutRouter);
 app.use("/orders", ordersRouter);
 app.use("/menu", menuRouter);
 app.use("/checkout", checkoutRouter);
-app.use("/items", itemsRouter);
+app.use("/items", itemsRouter)
 
 // Note: mount other resources here, using the same pattern above
 

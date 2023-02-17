@@ -29,7 +29,9 @@
             Create New Account
           </h3>
           <% if (error) {%>
-          <p class="error-message"><%=error%></p>
+          <div>
+            <span class="error-message"><%=error%></span>
+          <div></div>
           <% } %>
           <form class="form-inline" action="/register" method="POST">
             <div class="form-group mb-2 container d-flex flex-column">
@@ -77,9 +79,10 @@
                   class="form-control inputMobile"
                   type="text"
                   name="phone"
+                  placeholder="e.g. 14161234567"
                 />
               </div>
-              <div class="d-grid gap-2 col-2 mx-auto">
+              <div class="d-grid gap-2 mx-auto">
               <button type="submit" class="registerButton">
                 Register
               </button>

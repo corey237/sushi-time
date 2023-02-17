@@ -8,6 +8,9 @@ const {
 } = require("../db/queries/userHelpers");
 const db = require("../db/connection");
 
+
+//Used for items query on /checkout page
+
 router.get("/", (req, res) => {
   if (!req.session["user_id"]) {
     res.statusCode(403).send("Permission denied. Please sign in.");
