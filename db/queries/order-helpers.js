@@ -35,7 +35,7 @@ const sendSMS = (phoneNumber, message) => {
   console.log(process.env);
   const client = twilio(accountSid, authToken);
 
-  phoneNumber = "+" + phoneNumber;
+  phoneNumber = "+1" + phoneNumber;
 
   client.messages
     .create({
