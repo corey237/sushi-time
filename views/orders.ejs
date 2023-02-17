@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
     <link rel="stylesheet" href="/styles/nav.css" />
     <link rel="stylesheet" href="/styles/orders.css" />
-    <title>TinyApp</title>
+    <title>Sushi Time 🍣</title>
   </head>
   <body>
     <main style="margin: 5em">
@@ -25,10 +25,10 @@
           <% if (isAdmin) { %> Orders <% } else { %> My Orders <% } %>
         </h3>
       </div>
-
+      <% if (isAdmin) { %>
       <div class="card rounded-3 mb-4">
         <table
-          class="table table-hover table-striped table-fixed"
+          class="table table-responsive-sm table-hover table-striped table-fixed"
           id="orders-table"
         >
           <thead class="orders-table-head">
@@ -43,85 +43,94 @@
               <th scope="col">Complete Order</th>
             </tr>
           </thead>
-          <% if (isAdmin) { %> <% orders.sort((a, b) => b.time_placed -
+          <% } else { %>
+          <div class="card rounded-3 mb-4">
+            <table
+              class="table table-responsive-sm table-hover table-striped table-fixed"
+              id="orders-table"
+            >
+              <thead class="orders-table-head">
+                <tr>
+                  <th scope="col">Order #</th>
+                  <th scope="col">Placed</th>
+                  <th scope="col">Estimated Time(minutes)</th>
+
+                  <th scope="col">Total</th>
+                  <th scope="col">Completed</th>
+                  <th scope="col">Completed at</th>
+                </tr>
+              </thead>
+              <% } %> <% if (isAdmin) { %> <% orders.sort((a, b) =>
+              b.time_placed - a.time_placed).forEach(order => { %>
+              <tbody>
+                <tr>
+                  <td><%= order.id %></td>
+                  <td>
+                    <%= new Date(order.time_placed).toLocaleString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day:
+                    'numeric', hour: 'numeric', minute: 'numeric', }) %>
+                  </td>
+                  <td><%= order.time_estimated %></td>
+                  <td>
+                    <form action="/orders/estimated" method="POST">
+                      <input
+                        type="hidden"
+                        name="orderId"
+                        value="<%= order.id %>"
+                      />
+
+                      <input
+                        class="form-control-sm"
+                        type="number"
+                        id="estimatedPreparationTime"
+                        name="estimatedPreparationTime"
+                        required
+                      />
+                      <% if (order.time_estimated) { %>
+                      <button class="btn" type="submit" disabled>Sent</button>
+                      <% } else { %>
+                      <button class="btn" type="submit">Send</button>
+                      <% } %>
+                    </form>
+                  </td>
+                  <td>$<%= order.total_cost %></td>
+                  <td>
+                    <% if (order.is_completed) { %>
+                    <i class="text-success fas fa-check fa-lg"></i>
+                    <% } else { %>
+                    <i class="text-warning fas fa-clock fa-lg"></i>
+                    <% } %>
+                  </td>
+                  <td>
+                    <% if (order.time_completed === null) { %> <%=
+                    order.time_completed %> <% } else { %> <%= new
+                    Date(order.time_completed).toLocaleString('en-US', {
+                    weekday: 'long', year: 'numeric', month: 'long', day:
+                    'numeric', hour: 'numeric', minute: 'numeric', }) %> <% } %>
+                  </td>
+                  <td>
+                    <form action="/orders/complete" method="POST">
+                      <input
+                        type="hidden"
+                        name="orderId"
+                        value="<%= order.id %>"
+                      />
+                      <% if (order.is_completed) { %>
+                      <button class="btn" type="submit" disabled>
+                        Order Completed
+                      </button>
+                      <% } else { %>
+                      <button class="btn" type="submit">Complete Order</button>
+                      <% } %>
+                    </form>
+                  </td>
+                </tr>
+              </tbody>
+              <% }); %>
+            </table>
+          </div>
+          <% } else { %> <% orders.sort((a, b) => b.time_placed -
           a.time_placed).forEach(order => { %>
-          <tbody>
-            <tr>
-              <td><%= order.id %></td>
-              <td>
-                <%= new Date(order.time_placed).toLocaleString('en-US', {
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-                hour: 'numeric', minute: 'numeric', }) %>
-              </td>
-              <td><%= order.time_estimated %></td>
-              <td>
-                <form action="/orders/estimated" method="POST">
-                  <input type="hidden" name="orderId" value="<%= order.id %>" />
-
-                  <input
-                    class="form-control-sm"
-                    type="number"
-                    id="estimatedPreparationTime"
-                    name="estimatedPreparationTime"
-                    required
-                  />
-                  <% if (order.time_estimated) { %>
-                  <button class="btn" type="submit" disabled>Sent</button>
-                  <% } else { %>
-                  <button class="btn" type="submit">Send</button>
-                  <% } %>
-                </form>
-              </td>
-              <td>$<%= order.total_cost %></td>
-              <td>
-                <% if (order.is_completed) { %>
-                <i class="text-success fas fa-check fa-lg"></i>
-                <% } else { %>
-                <i class="text-warning fas fa-clock fa-lg"></i>
-                <% } %>
-              </td>
-              <td>
-                <% if (order.time_completed === null) { %> <%=
-                order.time_completed %> <% } else { %> <%= new
-                Date(order.time_completed).toLocaleString('en-US', { weekday:
-                'long', year: 'numeric', month: 'long', day: 'numeric', hour:
-                'numeric', minute: 'numeric', }) %> <% } %>
-              </td>
-              <td>
-                <form action="/orders/complete" method="POST">
-                  <input type="hidden" name="orderId" value="<%= order.id %>" />
-                  <% if (order.is_completed) { %>
-                  <button class="btn" type="submit" disabled>
-                    Order Completed
-                  </button>
-                  <% } else { %>
-                  <button class="btn" type="submit">Complete Order</button>
-                  <% } %>
-                </form>
-              </td>
-            </tr>
-          </tbody>
-          <% }); %>
-        </table>
-      </div>
-      <% } else { %> <% orders.sort((a, b) => b.time_placed -
-      a.time_placed).forEach(order => { %>
-      <div class="card rounded-3 mb-4">
-        <table
-          class="table table-hover table-striped table-fixed"
-          id="orders-table"
-        >
-          <thead class="orders-table-head">
-            <tr>
-              <th scope="col">Order #</th>
-              <th scope="col">Placed</th>
-              <th scope="col">Estimated Time(minutes)</th>
-
-              <th scope="col">Total</th>
-              <th scope="col">Completed</th>
-              <th width="100" scope="col">Completed at</th>
-            </tr>
-          </thead>
           <tbody>
             <tr>
               <td><%= order.id %></td>
