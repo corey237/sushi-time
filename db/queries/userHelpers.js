@@ -71,11 +71,12 @@ const getItemsByIds = function (ids) {
   });
 };
 
+
 const placeOrder = function (total, itemQuantities, userId) {
   const insertOrderQuery = `
-  INSERT INTO orders (user_id, total_cost)
+  INSERT INTO orders (user_id, total_cost, time_placed)
   VALUES
-  ($1, $2)
+  ($1, $2, NOW())
   RETURNING id
   `;
   let insertOrderItemsQuery = `
@@ -93,40 +94,32 @@ const placeOrder = function (total, itemQuantities, userId) {
     const orderId = newOrderResult.rows[0].id;
     //Send a text message to the restaurant with the order details
 
-
-
     const orderItemsQueryValues = Object.keys(itemQuantities)
       .map((itemId) => {
         return [orderId, itemId, itemQuantities[itemId]];
       })
       .flat();
     console.log("orderItemsQueryValues is: ", orderItemsQueryValues);
-    return db.query(insertOrderItemsQuery, orderItemsQueryValues)
-    .then(() => {
+    return db.query(insertOrderItemsQuery, orderItemsQueryValues).then(() => {
       const orderDetailsQuery = `
       SELECT items.item_name, items_in_order.quantity
-      FROM items_in_order 
+      FROM items_in_order
       JOIN items on items.id = item_id
       JOIN orders on orders.id = items_in_order.order_id
-      WHERE orders.id = $1
-      GROUP BY items_in_order.quantity, items.item_name;
-      `
-       db.query(orderDetailsQuery, [orderId])
-      .then((order) => {
-        let txtMessageStr = 'Order Received!\n';
-        txtMessageStr += `Order #${orderId}. Here are the order details:\n`
+      WHERE orders.id = $1;
+      `;
+    return db.query(orderDetailsQuery, [orderId]).then((order) => {
+        let txtMessageStr = "Order Received!\n";
+        txtMessageStr += `Order #${orderId}. Here are the order details:\n`;
         for (const item of order.rows) {
+          console.log(item);
           txtMessageStr += `x${item.quantity} ${item.item_name}\n`;
-          //Send SMS notification to restaurant
-          sendSMS("16479846313", txtMessageStr);
-          //Send SMS notification to user, Keeping it commented to avoid dupliocate messages
-          // sendSMS("16479846313", txtMessageStr);
         }
+        sendSMS("16479846313", txtMessageStr);
       });
-    })
+    });
   });
 };
-
 
 const getItems = function () {
   const sqlQuery = `SELECT * FROM items`;
